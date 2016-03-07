@@ -44,11 +44,23 @@ def parse_args():
     parser = argparse.ArgumentParser(description='A foo that bars',
                                      epilog="And that's how you'd foo a bar")
 
-    parser.add_argument('routes', choices=['rock', 'paper', 'scissors'], help="A route to rock, paper or scissors")
-    parser.add_argument("parameter", nargs='?', help="A parameter", type=str)
     parser.add_argument('--foo', nargs='?', help='foo help')
     parser.add_argument('--bar', nargs='+', help='bar help')
     parser.add_argument('--subprocess', nargs='?', help="Run a subprocess", const=run_subprocess)
+
+    subparsers = parser.add_subparsers(help='sub-command help',
+                                       dest='route'
+                                       )
+    subparsers.required = True
+
+    parser_a = subparsers.add_parser('route1', help='route1 help')
+    parser_a.add_argument('bar', nargs='?', type=int, help='bar help')
+    parser_a.add_argument('--baz', nargs='?', type=str, help='bar help')
+
+    parser_b = subparsers.add_parser('route2', help='route2 help')
+    parser_b.add_argument('--baz', choices=['rock', 'paper', 'scissors'], help='baz help')
+
+    parser.add_argument("parameter", nargs='?', help="A parameter", type=str)
 
     return parser.parse_args()
 
