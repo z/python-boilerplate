@@ -44,7 +44,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='A foo that bars',
                                      epilog="And that's how you'd foo a bar")
 
-    parser.add_argument('routes', choices=['rock', 'paper', 'scissors'])
+    parser.add_argument('routes', choices=['rock', 'paper', 'scissors'], help="A route to rock, paper or scissors")
     parser.add_argument("parameter", nargs='?', help="A parameter", type=str)
     parser.add_argument('--foo', nargs='?', help='foo help')
     parser.add_argument('--bar', nargs='+', help='bar help')
